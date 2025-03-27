@@ -2,10 +2,9 @@ FROM openjdk:17
 
 COPY . .
 
-WORKDIR /app
+RUN ls -la
 
 RUN ./gradlew build
 
-RUN ls -la
 
 ENTRYPOINT ["java","-jar","/app/build/libs/*.jar"]
