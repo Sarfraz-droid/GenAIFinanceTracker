@@ -1,0 +1,33 @@
+version: '3.7'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"  # Adjust the port mapping based on what your application uses
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker  # Optional: if using Spring profiles
+      # Add any other environment variables your application needs
+    volumes:
+      - ./data:/app/data  # Optional: persistent data volume
+    restart: unless-stopped
+    # Uncomment and adjust if your app needs a database
+    # depends_on:
+    #   - db
+  
+  # Uncomment if you need a database
+  # db:
+  #   image: postgres:14
+  #   environment:
+  #     - POSTGRES_PASSWORD=password
+  #     - POSTGRES_USER=user
+  #     - POSTGRES_DB=app
+  #   volumes:
+  #     - postgres-data:/var/lib/postgresql/data
+  #   restart: unless-stopped
+
+# Uncomment if using named volumes
+# volumes:
+#   postgres-data:
