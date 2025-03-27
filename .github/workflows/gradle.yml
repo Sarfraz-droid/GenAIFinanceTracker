@@ -36,14 +36,10 @@ jobs:
     - name: Build with Gradle Wrapper
       run: ./gradlew build -x test
 
-    - uses: actions/checkout@v2
+    - uses: actions/upload-artifact@v4
       with:
-        token: ${{secrets.PAT}}
-    - run: |
-        # do something
-        git checkout -b build
-        rm -rf .gitignore
-        git push origin build
+        name: build
+        path: build/
 
     # NOTE: The Gradle Wrapper is the default and recommended way to run Gradle (https://docs.gradle.org/current/userguide/gradle_wrapper.html).
     # If your project does not have the Gradle Wrapper configured, you can use the following configuration to run Gradle with a specified version.
