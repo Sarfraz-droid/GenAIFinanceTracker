@@ -85,12 +85,6 @@ public class PineconeService {
         }
     }
 
-    public boolean Delete(Integer id) {
-        Index index = getPinecone().getIndexConnection(INDEX_NAME);
-        index.delete(Arrays.asList("transaction-" + id.toString()), false, "ns1", null);
-        return true;
-    }
-
     public List<String> Search(String query) {
         Index index = getPinecone().getIndexConnection(INDEX_NAME);
         List<String> ids = new ArrayList<>();
@@ -114,11 +108,18 @@ public class PineconeService {
                                 System.out.println(id);
                                 ids.add(id);
                                 System.out.println(match.getScore());
+
                         }
                 }
 
                 return ids;
         }
+
+    public boolean Delete(Integer id) {
+        Index index = getPinecone().getIndexConnection(INDEX_NAME);
+        index.delete(Arrays.asList("transaction-" + id.toString()), false, "ns1", null);
+        return true;
+    }
 
     public OpenAIService getOpenAIService() {
         return openAIService;
